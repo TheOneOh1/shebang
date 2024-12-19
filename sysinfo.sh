@@ -191,9 +191,12 @@ get_network_info() {
     
     echo -e "\n${CYAN}Open Ports:${NC}"
     if command_exists ss; then
-        ss -tuln | grep LISTEN
+#        ss -tuln | grep LISTEN
+	sudo ss -tuln 2>/dev/null | awk 'NR>1 {print $5 " - " $1 }' | sed 's/.*://'
+#	netstat -tuln 2>/dev/null | awk 'NR>2 {print $4 " - " $1}' | sed 's/.*://'
     elif command_exists netstat; then
-        netstat -tuln | grep LISTEN
+#        netstat -tuln | grep LISTEN
+	netstat -tuln 2>/dev/null | awk 'NR>2 {print $4 " - " $1}' | sed 's/.*://'
     else
         echo "No tool available to check open ports"
     fi
