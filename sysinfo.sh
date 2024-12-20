@@ -10,7 +10,7 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 BOLD='\033[1m'
 
-# Error handling
+
 set -u # Exit on undefined variable
 trap 'echo -e "${RED}An error occurred. Exiting...${NC}"; exit 1' ERR
 
